@@ -30,9 +30,6 @@ export class Job extends BaseEntity {
   place: number;
 
   @Column()
-  state: string;
-
-  @Column()
   salary_hour: number;
 
   @Column()

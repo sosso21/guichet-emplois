@@ -24,7 +24,7 @@ const searchJobs = async () => {
     await page.goto(
       `https://www.guichetemplois.gc.ca/jobsearch/rechercheemplois?searchstring=${name}&locationstring=${place}`,
       {
-        waitUntil: "domcontentloaded",
+        // waitUntil: "domcontentloaded",
       }
     );
 
@@ -43,7 +43,24 @@ const searchJobs = async () => {
 
     for (let i = 0; i < links.length; i++) {
       const dateHtml = await links[i].$(".date");
-      const date = await page.evaluate((el) => el.textContent, dateHtml);
+      const datefr = await page.evaluate((el) => el.textContent, dateHtml);
+      const dateArray = datefr.join(" ");
+      const monthFr = [
+        "janvier",
+        "février",
+        "mars",
+        "avril",
+        "mai",
+        "juin",
+        "juillet",
+        "août",
+        "septembre",
+        "octobre",
+        "novembre",
+        "décembre",
+      ];
+      dateArray[1] = monthFr.indexOf(dateArray[1]) + 1;
+      const date = dateArray.split("/");
 
       /// title
 
@@ -113,7 +130,7 @@ const searchJobs = async () => {
           job.is_negotiable = salary.includes("à négocier");
           job.employer_name = business.trim();
           job.search = search.id;
-          job.state = addr;
+          job.place = addr;
 
           const insertion = await job.save();
           console.log("insertion:", insertion);
