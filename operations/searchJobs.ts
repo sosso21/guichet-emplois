@@ -3,7 +3,9 @@ import { Search } from "models/search";
 import puppeteer from "puppeteer";
 
 const searchJobs = async () => {
-  const browser = await puppeteer.launch({ headless: false }); // default is true
+  const browser = await puppeteer.launch({
+    headless: process.env.HEADLESS_BROWSER == "true",
+  }); // default is true
 
   const page = await browser.newPage();
 
@@ -21,13 +23,16 @@ const searchJobs = async () => {
     // Configure the navigation timeout
     await page.setDefaultNavigationTimeout(0);
 
-    await page.goto(
-      `https://www.guichetemplois.gc.ca/jobsearch/rechercheemplois?searchstring=${name}&locationstring=${place}`,
-      {
-        // waitUntil: "domcontentloaded",
-      }
-    );
-
+    console.time("search about" + search.q);
+    await page
+      .goto(
+        `https://www.guichetemplois.gc.ca/jobsearch/rechercheemplois?searchstring=${name}&locationstring=${place}`,
+        {
+          waitUntil: "networkidle0",
+        }
+      )
+      .catch((err) => console.log("error loading url", err));
+    console.timeEnd("search about" + search.q);
     try {
       let morePage = 8;
       while (morePage > 0) {
@@ -43,8 +48,13 @@ const searchJobs = async () => {
 
     for (let i = 0; i < links.length; i++) {
       const dateHtml = await links[i].$(".date");
-      const datefr = await page.evaluate((el) => el.textContent, dateHtml);
-      const dateArray = datefr.join(" ");
+      const dateFr = await page.evaluate((el) => el.textContent, dateHtml);
+      const dateArray = dateFr
+        .split("\n")
+        .join("")
+        .split("\t")
+        .join("")
+        .split(" ");
       const monthFr = [
         "janvier",
         "février",
@@ -60,7 +70,7 @@ const searchJobs = async () => {
         "décembre",
       ];
       dateArray[1] = monthFr.indexOf(dateArray[1]) + 1;
-      const date = dateArray.split("/");
+      const date = dateArray.reverse().join("-");
 
       /// title
 
@@ -140,7 +150,6 @@ const searchJobs = async () => {
       }
     }
   }
-
   await browser.close();
 };
 

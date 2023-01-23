@@ -27,7 +27,7 @@ export class Job extends BaseEntity {
   published_at: string;
 
   @Column()
-  place: number;
+  place: string;
 
   @Column()
   salary_hour: number;
@@ -39,7 +39,10 @@ export class Job extends BaseEntity {
   mean_salary_hour: number;
 
   @Column()
-  work_hour: number;
+  min_work_hour: number;
+
+  @Column()
+  max_work_hour: number;
 
   @Column()
   employer_name: string;
@@ -67,6 +70,9 @@ export class Job extends BaseEntity {
     default: () => false,
   })
   is_validate: Boolean;
+
+  @Column()
+  accept_algerian: Boolean;
 
   @CreateDateColumn({
     type: "timestamp",

@@ -1,11 +1,9 @@
-import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import "reflect-metadata";
 import AppDataSource from "./db";
 import searchJobs from "operations/searchJobs";
+import getJobInfo from "operations/getJobInfo";
 
 (async () => {
-  dotenv.config({});
-
   try {
     await AppDataSource.initialize();
   } catch (e) {
@@ -13,4 +11,5 @@ import searchJobs from "operations/searchJobs";
   }
 
   await searchJobs();
+  await getJobInfo();
 })();
