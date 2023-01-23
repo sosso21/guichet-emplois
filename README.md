@@ -46,6 +46,7 @@
 
 - `npm install`.
 - run `mysql`.
+- run `cp .env.example .env` or create your `.env` file.
 - `npm run start`.
 
 ## ✍️ Author <a name = "author"></a>
