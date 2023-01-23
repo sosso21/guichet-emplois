@@ -94,7 +94,11 @@ const getJobInfo = async () => {
       console.log("there are no information about work_hour \n  err:", err);
     }
     job["is_scraped"] = true;
-    await Job.update({ id: job.id }, job);
+    try {
+      await Job.update({ id: job.id }, job);
+    } catch (err) {
+      console.log("some problem happen ! \n  err:", err);
+    }
   }
 
   await browser.close();
