@@ -50,7 +50,7 @@
 
 ## ✍️ Author <a name = "author"></a>
 
-My name is ** Hermes ** and you can visite my <a href="https://hermes-dev-fr.web.app">website </a>.
+My name is _ Hermes _ and you can visite my <a href="https://hermes-dev-fr.web.app">website </a>.
 
 <hr/>
 <img src="https://hermes-dev-fr.web.app/_nuxt/image/7ca9c4.jpg" />
