@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_39/assets/sig-blk-fr.svg"></a>
+ <img  src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_39/assets/sig-blk-fr.svg"></a>
 </p>
 
 <h3 align="center">guichet-emplois</h3>
