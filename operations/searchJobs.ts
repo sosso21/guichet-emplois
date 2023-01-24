@@ -103,20 +103,20 @@ const searchJobs = async () => {
         .join("")
         .trim();
 
-      console.log("location is: " + addr);
-
       // == salary
       const salaryHtml = await links[i].$(".salary");
       const salary = await page.evaluate((el) => el.textContent, salaryHtml);
-      const salary_hour = salary
-        .split("\n")
-        .join("")
-        .split("\t")
-        .join("")
-        .split(" Salaire :")
-        .join("")
-        .split("$")[0]
-        .trim();
+      const salary_hour = salary.includes("Salaire non disponible")
+        ? ""
+        : salary
+            .split("\n")
+            .join("")
+            .split("\t")
+            .join("")
+            .split(" Salaire :")
+            .join("")
+            .split("$")[0]
+            .trim();
 
       const id = await page.evaluate((item) => {
         const linkRegex = item
