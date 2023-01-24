@@ -21,6 +21,12 @@ export class Search extends BaseEntity {
   @Column()
   place: string;
 
+  @Column({
+    type: Boolean,
+    default: () => true,
+  })
+  active: Boolean;
+
   @OneToMany(() => Job, (job) => job.search)
   jobs: Job[];
 

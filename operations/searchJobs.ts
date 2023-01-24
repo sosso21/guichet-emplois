@@ -12,7 +12,11 @@ const searchJobs = async () => {
   // Set screen size
   await page.setViewport({ width: 1080, height: 1024 });
 
-  const searchResults = await Search.find();
+  const searchResults = await Search.find({
+    where: {
+      active: true,
+    },
+  });
 
   for (let index = 0; index < searchResults.length; index++) {
     const search = searchResults[index];
