@@ -63,6 +63,12 @@ export class Job extends BaseEntity {
     type: Boolean,
     default: () => false,
   })
+  is_applied: Boolean;
+
+  @Column({
+    type: Boolean,
+    default: () => false,
+  })
   is_negotiable: Boolean;
 
   @Column({
