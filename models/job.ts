@@ -78,7 +78,7 @@ export class Job extends BaseEntity {
   is_validate: Boolean;
 
   @Column()
-  accept_algerian: Boolean;
+  req_licence: Boolean;
 
   @CreateDateColumn({
     type: "timestamp",
