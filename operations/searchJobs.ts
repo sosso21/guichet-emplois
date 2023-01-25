@@ -74,7 +74,13 @@ const searchJobs = async () => {
         "décembre",
       ];
       dateArray[1] = monthFr.indexOf(dateArray[1]) + 1;
-      const date = dateArray.reverse().join("-");
+
+      dateArray[1] =
+        dateArray[1] < 10
+          ? "0" + dateArray[1].toString()
+          : dateArray[1].toString();
+
+      const date = dateArray.reverse().join("-").split(" ").join("");
 
       /// title
 

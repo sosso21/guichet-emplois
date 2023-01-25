@@ -64,7 +64,7 @@ const getJobInfo = async () => {
     }
 
     try {
-      job["req_licence"] = await page.evaluate(
+      job["req_license"] = await page.evaluate(
         (el) =>
           el.textContent
             .split("\n")
