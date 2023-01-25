@@ -23,8 +23,10 @@ export class Job extends BaseEntity {
   @Column()
   title: string;
 
-  @Column()
-  published_at: string;
+  @Column({
+    type: "date",
+  })
+  published_at: Date;
 
   @Column()
   place: string;
@@ -78,7 +80,7 @@ export class Job extends BaseEntity {
   is_validate: Boolean;
 
   @Column()
-  req_licence: Boolean;
+  req_license: Boolean;
 
   @CreateDateColumn({
     type: "timestamp",
