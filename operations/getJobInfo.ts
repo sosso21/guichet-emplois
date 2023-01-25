@@ -64,9 +64,9 @@ const getJobInfo = async () => {
     }
 
     try {
-      job["accept_algerian"] = await page.evaluate(
+      job["req_licence"] = await page.evaluate(
         (el) =>
-          !el.textContent
+          el.textContent
             .split("\n")
             .join(" ")
             .split("\t")
