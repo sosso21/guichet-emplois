@@ -156,16 +156,15 @@ const searchJobs = async () => {
           job.title = titleJob.split("\n")[0].trim();
           job.is_validate = titleJob.includes("Vérifié");
           job.published_at = date.trim();
-          job.salary_hour = salary_hour;
+          job.salary_hour = +salary_hour;
           job.is_negotiable = salary.includes("à négocier");
           job.employer_name = business.trim();
           job.search = search.id;
           job.place = addr;
 
           const insertion = await job.save();
-          console.log("insertion:", insertion);
         } catch (e) {
-          console.log("e:", e);
+          console.log("error:", e);
         }
       }
     }
