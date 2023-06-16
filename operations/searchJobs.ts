@@ -42,6 +42,16 @@ const searchJobs = async () => {
       while (morePage > 0) {
         morePage--;
         await page.waitForSelector("#moreresultbutton:not([disabled])");
+
+        // close modal if  if exist: (You are connected from an other country)
+        try {
+          const closeSelector = "[type='button'][title='Cancel']";
+
+          await page.waitForSelector(closeSelector);
+
+          await page.click(closeSelector);
+        } catch {}
+
         await page.click("#moreresultbutton:not([disabled])");
       }
     } catch {
