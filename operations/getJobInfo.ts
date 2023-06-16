@@ -37,6 +37,15 @@ const getJobInfo = async () => {
     console.timeEnd("Job id :");
 
     try {
+      // close modal if  if exist: (You are connected from an other country)
+      try {
+        const closeSelector = "[type='button'][title='Cancel']";
+
+        await page.waitForSelector(closeSelector);
+
+        await page.click(closeSelector);
+      } catch {}
+
       await page.click("#applynowbutton");
 
       await page.waitForSelector("#howtoapply>p>a", {
