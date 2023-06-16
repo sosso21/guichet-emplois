@@ -156,7 +156,7 @@ const searchJobs = async () => {
           job.title = titleJob.split("\n")[0].trim();
           job.is_validate = titleJob.includes("Vérifié");
           job.published_at = date.trim();
-          job.salary_hour = +salary_hour;
+          job.salary_hour = +salary_hour.trim();
           job.is_negotiable = salary.includes("à négocier");
           job.employer_name = business.trim();
           job.search = search.id;
