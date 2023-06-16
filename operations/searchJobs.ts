@@ -123,8 +123,8 @@ const searchJobs = async () => {
       const salaryHtml = await links[i].$(".salary");
       const salary = await page.evaluate((el) => el.textContent, salaryHtml);
       const salary_hour = salary.includes("Salaire non disponible")
-        ? ""
-        : salary
+        ? undefined
+        : +salary
             .split("\n")
             .join("")
             .split("\t")
@@ -132,6 +132,10 @@ const searchJobs = async () => {
             .split(" Salaire :")
             .join("")
             .split("$")[0]
+            .split(" ")
+            .join("")
+
+            .split(",")[0]
             .trim();
 
       const id = await page.evaluate((item) => {
@@ -156,7 +160,7 @@ const searchJobs = async () => {
           job.title = titleJob.split("\n")[0].trim();
           job.is_validate = titleJob.includes("Vérifié");
           job.published_at = date.trim();
-          job.salary_hour = +salary_hour.trim();
+          job.salary_hour = salary_hour;
           job.is_negotiable = salary.includes("à négocier");
           job.employer_name = business.trim();
           job.search = search.id;
