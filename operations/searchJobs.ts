@@ -124,7 +124,7 @@ const searchJobs = async () => {
       const salary = await page.evaluate((el) => el.textContent, salaryHtml);
       const salary_hour = salary.includes("Salaire non disponible")
         ? undefined
-        : +salary
+        : salary
             .split("\n")
             .join("")
             .split("\t")
